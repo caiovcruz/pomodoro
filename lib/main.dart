@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Pomodoro',
         theme: ThemeData(
           colorScheme: ColorScheme.fromSwatch().copyWith(
@@ -34,41 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// import 'package:flutter_mobx/flutter_mobx.dart';
-// import 'store/counter.store.dart';
-// final store = CounterStore();
-
-// class HomePage extends StatelessWidget {
-//   const HomePage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Counter'),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             const Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Observer(
-//               builder: (ctx) => Text(
-//                 '${store.counter}',
-//                 style: Theme.of(context).textTheme.headline4,
-//               ),
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: store.increment,
-//         tooltip: 'Increment',
-//         child: const Icon(Icons.add),
-//       ), // This trailing comma makes auto-formatting nicer for build methods.
-//     );
-//   }
-// }

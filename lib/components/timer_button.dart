@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class TimerButton extends StatelessWidget {
   final String text;
   final IconData icon;
+  final void Function()? onPressed;
 
   const TimerButton({
     Key? key,
     required this.text,
     required this.icon,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class TimerButton extends StatelessWidget {
     final colorScheme = Theme.of(context).colorScheme;
 
     return ElevatedButton(
-      onPressed: () {},
+      onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         primary: colorScheme.tertiary,
         padding: const EdgeInsets.symmetric(

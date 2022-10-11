@@ -14,37 +14,43 @@ class PomodoroPage extends StatelessWidget {
     final store = Provider.of<PomodoroStore>(context);
 
     return Scaffold(
-      body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const Expanded(
-              child: TimerWidget(),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40),
-              child: Observer(
-                builder: (ctx) => Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    EnterTimeWidget(
-                      title: 'Work',
-                      value: store.workTime,
-                      inc: store.incrementWorkTime,
-                      dec: store.decrementWorkTime,
-                    ),
-                    EnterTimeWidget(
-                      title: 'Rest',
-                      value: store.restTime,
-                      inc: store.incrementRestTime,
-                      dec: store.decrementRestTime,
-                    ),
-                  ],
-                ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          const Expanded(
+            child: TimerWidget(),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 40),
+            child: Observer(
+              builder: (ctx) => Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  EnterTimeWidget(
+                    title: 'Work',
+                    value: store.workTime,
+                    inc: store.started && store.isWorking
+                        ? null
+                        : store.incrementWorkTime,
+                    dec: store.started && store.isWorking
+                        ? null
+                        : store.decrementWorkTime,
+                  ),
+                  EnterTimeWidget(
+                    title: 'Rest',
+                    value: store.restTime,
+                    inc: store.started && store.isResting
+                        ? null
+                        : store.incrementRestTime,
+                    dec: store.started && store.isResting
+                        ? null
+                        : store.decrementRestTime,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
