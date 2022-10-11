@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class EnterTimeWidget extends StatelessWidget {
   final String title;
   final int value;
+  final void Function()? inc;
+  final void Function()? dec;
 
   const EnterTimeWidget({
     Key? key,
     required this.title,
     required this.value,
+    this.inc,
+    this.dec,
   }) : super(key: key);
 
   @override
@@ -26,7 +30,7 @@ class EnterTimeWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: dec,
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),
@@ -43,7 +47,7 @@ class EnterTimeWidget extends StatelessWidget {
               ),
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: inc,
               style: ElevatedButton.styleFrom(
                 shape: const CircleBorder(),
                 padding: const EdgeInsets.all(15),

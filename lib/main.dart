@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'pages/pomodoro_page.dart';
+import 'store/pomodoro.store.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,16 +14,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Pomodoro',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Colors.red[500],
-          secondary: Colors.green[500],
-          tertiary: Colors.black,
+    return MultiProvider(
+      providers: [
+        Provider<PomodoroStore>(
+          create: (_) => PomodoroStore(),
         ),
+      ],
+      child: MaterialApp(
+        title: 'Pomodoro',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: Colors.red[500],
+            secondary: Colors.green[500],
+            tertiary: Colors.black,
+          ),
+        ),
+        home: const PomodoroPage(),
       ),
-      home: const PomodoroPage(),
     );
   }
 }
