@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: Colors.red[500],
           secondary: Colors.green[500],
+          tertiary: Colors.black,
         ),
       ),
       home: const PomodoroPage(),
