@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:mobx/mobx.dart';
+import 'package:pomodoro/extensions/string_extension.dart';
+
+import '../models/notification_service.dart';
 
 part 'pomodoro.store.g.dart';
 
@@ -13,13 +16,13 @@ abstract class _PomodoroStore with Store {
   bool started = false;
 
   @observable
-  int minutes = 2;
+  int minutes = 1;
 
   @observable
   int seconds = 0;
 
   @observable
-  int workTime = 2;
+  int workTime = 1;
 
   @observable
   int restTime = 1;
@@ -102,7 +105,7 @@ abstract class _PomodoroStore with Store {
 
   bool get isResting => intervalType == IntervalType.rest;
 
-  void _changeIntervalType() {
+  Future<void> _changeIntervalType() async {
     if (isWorking) {
       intervalType = IntervalType.rest;
       minutes = restTime;
@@ -112,6 +115,13 @@ abstract class _PomodoroStore with Store {
     }
 
     seconds = 0;
+
+    await NotificationService.instance.showLocalNotification(
+      id: 0,
+      title: "${intervalType.name.capitalize()} time!",
+      body: "It's time to ${intervalType.name}!",
+      payload: "You ${isWorking ? 'rested well' : 'worked hard'}. Nice!",
+    );
   }
 
   bool _greaterThan(int value, int greaterValue) {

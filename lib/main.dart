@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'models/notification_service.dart';
 import 'pages/pomodoro_page.dart';
 import 'store/pomodoro.store.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  NotificationService().init();
   runApp(const MyApp());
 }
 

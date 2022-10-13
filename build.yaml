@@ -1,5 +1,5 @@
 targets:
-  $defaults:
+  $default:
     builders:
       mobx_codegen|mobx_generator:
         generate_for:

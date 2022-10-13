@@ -1,13 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pomodoro/models/notification_service.dart';
 import 'package:provider/provider.dart';
 
 import '../components/enter_time_widget.dart';
 import '../components/timer_widget.dart';
 import '../store/pomodoro.store.dart';
 
-class PomodoroPage extends StatelessWidget {
+class PomodoroPage extends StatefulWidget {
   const PomodoroPage({Key? key}) : super(key: key);
+
+  @override
+  State<PomodoroPage> createState() => _PomodoroPageState();
+}
+
+class _PomodoroPageState extends State<PomodoroPage> {
+  final notificationService = NotificationService.behaviorSubject;
+
+  @override
+  void initState() {
+    super.initState();
+    listenToNotificationStream();
+  }
+
+  void listenToNotificationStream() => notificationService.listen(
+        (payload) => ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(payload),
+        )),
+      );
 
   @override
   Widget build(BuildContext context) {
